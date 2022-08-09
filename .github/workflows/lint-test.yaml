@@ -1,0 +1,30 @@
+name: Lint and Test
+
+on:
+  # manual trigger
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup
+      - run: yarn lint
+
+  cypress-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup
+      - name: Cypress run
+        uses: cypress-io/github-action@v4
+        with:
+          install: false
+          start: yarn start
