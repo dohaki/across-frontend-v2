@@ -31,7 +31,13 @@ jobs:
       - if: steps.cypress-cache.outputs.cache-hit != 'true'
         run: yarn cypress install
       - run: yarn build
-      - name: Cypress run
+        env:
+          REACT_APP_PUBLIC_INFURA_ID: ${{ secrets.CYPRESS_PUBLIC_INFURA_ID }}
+          REACT_APP_PUBLIC_ONBOARD_API_KEY: ${{ secrets.CYPRESS_PUBLIC_ONBOARD_API_KEY }}
+          REACT_APP_REWARDS_API_URL: ${{ secrets.CYPRESS_REWARDS_API_URL }}
+          REACT_APP_CHAIN_137_PROVIDER_URL: ${{ secrets.CYPRESS_CHAIN_137_PROVIDER_URL }}
+          REACT_APP_CHAIN_42161_PROVIDER_URL: ${{ secrets.CYPRESS_CHAIN_42161_PROVIDER_URL }}
+      - name: Cypress run Chrome
         uses: cypress-io/github-action@v4
         with:
           install: false
