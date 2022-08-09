@@ -13,10 +13,8 @@ runs:
     - uses: actions/cache@v3
       id: yarn-cache
       with:
-        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-yarn-
+        path: node_modules/
+        key: ${{ runner.os }}-install-${{ hashFiles('**/yarn.lock') }}
 
     - if: steps.yarn-cache.outputs.cache-hit != 'true'
       run: yarn install --frozen-lockfile --ignore-scripts
