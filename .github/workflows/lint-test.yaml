@@ -30,11 +30,11 @@ jobs:
           key: ${{ runner.os }}-cypress-${{ hashFiles('node_modules/cypress') }}
       - if: steps.cypress-cache.outputs.cache-hit != 'true'
         run: yarn cypress install
+      - run: yarn build
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
           install: false
           browser: chrome
-          start: yarn start
+          start: yarn serve
           wait-on: "http://localhost:3000"
-          wait-on-timeout: 120

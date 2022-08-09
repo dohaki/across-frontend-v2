@@ -53,6 +53,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "serve": "serve build",
     "test": "react-scripts test",
     "test-api": "jest",
     "eject": "react-scripts eject",
@@ -98,7 +99,8 @@
     "cypress": "^10.4.0",
     "husky": "^8.0.0",
     "lint-staged": "^12.4.1",
-    "prettier": "^2.4.1"
+    "prettier": "^2.4.1",
+    "serve": "^14.0.1"
   },
   "babel": {
     "env": {
