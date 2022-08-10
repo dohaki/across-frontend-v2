@@ -44,3 +44,15 @@ jobs:
           REACT_APP_REWARDS_API_URL: ${{ secrets.CYPRESS_REWARDS_API_URL }}
           REACT_APP_CHAIN_137_PROVIDER_URL: ${{ secrets.CYPRESS_CHAIN_137_PROVIDER_URL }}
           REACT_APP_CHAIN_42161_PROVIDER_URL: ${{ secrets.CYPRESS_CHAIN_42161_PROVIDER_URL }}
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+      - name: Upload videos
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
