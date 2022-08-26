@@ -30,10 +30,7 @@ jobs:
           - 8545:8545
         # Set health checks to wait until hardhat has started
         options: >-
-          --health-cmd "curl --fail http://localhost:8545 || exit 1"
-          --health-interval 30s
-          --health-timeout 5s
-          --health-retries 5
+          --health-cmd "curl --fail http://localhost:8545"
 
     steps:
       - uses: actions/checkout@v3
