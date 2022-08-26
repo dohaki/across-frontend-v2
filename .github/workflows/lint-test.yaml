@@ -20,6 +20,21 @@ jobs:
 
   cypress-tests:
     runs-on: ubuntu-latest
+
+    services:
+      hardhat:
+        image: umaprotocol/protocol
+        env:
+          COMMAND: "cd protocol && HARDHAT_CHAIN_ID=1 yarn hardhat node --fork https://mainnet.infura.io/v3/${{ secrets.CYPRESS_PUBLIC_INFURA_ID }}"
+        ports:
+          - 8545:8545
+        # Set health checks to wait until hardhat has started
+        options: >-
+          --health-cmd "curl --fail http://localhost:8545 || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup
